@@ -20,9 +20,9 @@ public class App
                 "buffalo", "espionage", "keyhole", "kilobyte", "luxury", "quartz", "rhubarb", "scratch", "megahertz",
                 "stronghold", "strength", "transcript", "vaporize", "whiskey", "xylophone", "youth"};
         String input = new String();
-        final String[] bokstaver = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w", "v", "x", "y", "z"};
+        //final String[] bokstaver = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w", "v", "x", "y", "z"};
         char inputSave;
-        int bokPos;
+        int bokstavsPosition;
 
         //Initierar ord
         String rightAnswer = possibleWords[rand.nextInt(possibleWords.length)];
@@ -33,9 +33,9 @@ public class App
 
         int antalGissningar = 0;
         StringBuilder gissningar = new StringBuilder();
-        int sPos = 0;
         boolean win = false;
 
+        //loop för spelet börjar
         while (antalGissningar < 8 && !win) {
             System.out.print("Guess a letter or the whole word.\nWord: ");
             for (char ord : korrektGissning) {
@@ -57,14 +57,14 @@ public class App
                         System.out.println("Correct guess");
                         korrektGissning[compareLetter(inputSave, rightAnswer)] = inputSave;
 
-                        bokPos = compareLetter(inputSave, rightAnswer) + 1;
+                        bokstavsPosition = compareLetter(inputSave, rightAnswer) + 1;
                         //kollar om det finns fler utav bokstaven i ordet
-                        while (rightAnswer.length() > bokPos) {
-                            if (bokPos <= compareLetter(inputSave, bokPos, rightAnswer)) {
-                                korrektGissning[compareLetter(inputSave, bokPos, rightAnswer)] = inputSave;
-                                bokPos++;
+                        while (rightAnswer.length() > bokstavsPosition) {
+                            if (bokstavsPosition <= compareLetter(inputSave, bokstavsPosition, rightAnswer)) {
+                                korrektGissning[compareLetter(inputSave, bokstavsPosition, rightAnswer)] = inputSave;
+                                bokstavsPosition++;
                             } else {
-                                bokPos++;
+                                bokstavsPosition++;
                             }
                         }
                     } else {
@@ -87,6 +87,7 @@ public class App
 
         }
 
+        //När spelet är slut
         in.close();
 
         if(antalGissningar<8){
